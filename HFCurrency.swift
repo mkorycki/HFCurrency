@@ -59,7 +59,7 @@ struct HFCurrencyDescription:Equatable
 
 
 
-struct HFCurrency:CustomStringConvertible
+class HFCurrency:CustomStringConvertible
 {
     
     private var amnt:Decimal!
@@ -125,7 +125,7 @@ struct HFCurrency:CustomStringConvertible
     }
     
     
-    mutating func add(currency:HFCurrency) -> Bool
+    func add(currency:HFCurrency) -> Bool
     {
         if self.desc == currency.desc
         {
@@ -140,7 +140,7 @@ struct HFCurrency:CustomStringConvertible
     }
     
     
-    mutating func subtract(currency:HFCurrency) -> Bool
+    func subtract(currency:HFCurrency) -> Bool
     {
         if self.desc == currency.desc
         {
@@ -159,7 +159,7 @@ struct HFCurrency:CustomStringConvertible
     {
         if self.desc == currency.desc
         {
-            var newCurrency = HFCurrency.init(currencyDescription: currency.desc)
+            let newCurrency = HFCurrency.init(currencyDescription: currency.desc)
             newCurrency.amount = self.amnt + currency.amnt
             return newCurrency
         }
@@ -174,7 +174,7 @@ struct HFCurrency:CustomStringConvertible
     {
         if self.desc == currency.desc
         {
-            var newCurrency = HFCurrency.init(currencyDescription: currency.desc)
+            let newCurrency = HFCurrency.init(currencyDescription: currency.desc)
             newCurrency.amount = self.amnt - currency.amnt
             return newCurrency
         }
@@ -186,7 +186,7 @@ struct HFCurrency:CustomStringConvertible
     
     
     
-    mutating func exchange(using exchangeRate:HFExchangeRate) -> Bool
+    func exchange(using exchangeRate:HFExchangeRate) -> Bool
     {
         if desc==exchangeRate.currencyDescription1
         {
@@ -211,13 +211,13 @@ struct HFCurrency:CustomStringConvertible
     {
         if desc==exchangeRate.currencyDescription1
         {
-            var newCurrency = HFCurrency.init(currencyDescription: exchangeRate.currencyDescription2)
+            let newCurrency = HFCurrency.init(currencyDescription: exchangeRate.currencyDescription2)
             newCurrency.amount = amount / exchangeRate.rate
             return newCurrency
         }
         else if desc==exchangeRate.currencyDescription2
         {
-            var newCurrency = HFCurrency.init(currencyDescription: exchangeRate.currencyDescription1)
+            let newCurrency = HFCurrency.init(currencyDescription: exchangeRate.currencyDescription1)
             newCurrency.amount = amount * exchangeRate.rate
             return newCurrency
         }
@@ -235,7 +235,7 @@ struct HFCurrency:CustomStringConvertible
 
 
 
-struct HFExchangeRate
+class HFExchangeRate
 {
     
     var rate:Decimal!
